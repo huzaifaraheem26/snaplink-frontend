@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SnapLink | Instant URL Shortener</title>
+
+<!-- Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Geist:wght@400;500;700&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"/>
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- 1. Sticky Header -->
+<header class="site-header">
+<nav class="nav">
+<div class="logo">
+<span class="logo-text">SNAPLINK</span>
+</div>
+<div class="nav-links" id="navLinks">
+<a class="nav-link github-btn" href="https://github.com/huzaifaraheem26">GitHub</a>
+</div>
+<button class="menu-icon" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</nav>
+</header>
+
+<main>
+
+<!-- 2. Hero Section -->
+<section class="hero">
+<div class="hero-glow"></div>
+<div class="hero-content">
+<h1 class="hero-title">Shorten Your Links. Instantly.</h1>
+<p class="hero-subtitle">
+    Lightning-fast URL shortening with built-in QR code generation and real-time analytics. Designed for power users and developers.
+</p>
+<div class="url-form glass-card">
+<div class="input-wrapper">
+<span class="material-symbols-outlined input-icon">link</span>
+<input
+    id="urlInput"
+    class="url-input"
+    placeholder="Paste your long URL here"
+    type="url"
+    inputmode="url"
+    autocomplete="off"
+    aria-label="Long URL to shorten"
+/>
+</div>
+<button class="btn-primary" id="shortenBtn">Shorten URL</button>
+</div>
+</div>
+</section>
+
+<!-- 3. Result Card (hidden until a link is generated) -->
+<section class="result-section">
+<div class="result-card glass-card">
+<div class="result-info">
+<span class="result-label">Success! Your link is ready</span>
+<div class="result-link-row">
+<h2 id="shortUrl" class="result-link"></h2>
+<button class="copy-btn" id="copyBtn" aria-label="Copy short link">
+<span class="material-symbols-outlined">content_copy</span>
+</button>
+</div>
+<div class="result-actions">
+<button class="btn-outline" id="downloadQrBtn">
+<span class="material-symbols-outlined">download</span>
+    Download QR
+</button>
+</div>
+</div>
+<div class="qr-box">
+<div class="qr-inner">
+    <img id="qrImage" alt="QR code for your short link" style="display:none;">
+<svg class="qr-svg" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm13-2h3v2h-3v-2zm-3 0h2v2h-2v-2zm3 3h3v2h-3v-2zm-3 0h2v2h-2v-2zm3 3h3v2h-3v-2zm-3 0h2v2h-2v-2zm0-6h2v2h-2v-2zm3 0h3v2h-3v-2zm-6 3h2v2h-2v-2zm0 3h2v2h-2v-2z"></path>
+</svg>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 4. Stats Strip -->
+<section class="stats-section">
+<div class="stat-card glass-card">
+<div class="stat-icon icon-primary">
+<span class="material-symbols-outlined">link</span>
+</div>
+<div>
+<div class="stat-value">1.2k</div>
+<div class="stat-label">Links Created</div>
+</div>
+</div>
+<div class="stat-card glass-card">
+<div class="stat-icon icon-secondary">
+<span class="material-symbols-outlined">ads_click</span>
+</div>
+<div>
+<div class="stat-value">45k</div>
+<div class="stat-label">Total Clicks</div>
+</div>
+</div>
+<div class="stat-card glass-card">
+<div class="stat-icon icon-primary">
+<span class="material-symbols-outlined">qr_code_2</span>
+</div>
+<div>
+<div class="stat-value">850</div>
+<div class="stat-label">QR Codes Generated</div>
+</div>
+</div>
+</section>
+
+<!-- 5. Recent Links -->
+<section class="links-section">
+<div class="links-header">
+<div class="links-heading">
+<h2 class="section-title">Recent Links</h2>
+<span class="links-count" id="linksCount">0</span>
+</div>
+<button class="view-all-btn" id="viewAllBtn">View All</button>
+</div>
+
+<!-- Unified responsive link list -->
+<div class="links-grid" id="linksList">
+<!-- Data will be loaded dynamically -->
+</div>
+</section>
+
+</main>
+
+<!-- 6. Footer -->
+<footer class="site-footer">
+<div class="footer-inner">
+<div class="footer-left">
+<div class="footer-logo">
+<span class="footer-logo-text">SNAPLINK</span>
+</div>
+<p class="footer-copy">© 2026 SnapLink. Built for speed.</p>
+</div>
+<div class="footer-links">
+</div>
+<div class="footer-social">
+<a class="social-btn glass-card" href="#" id="shareBtn" role="button" aria-label="Share SnapLink"><span class="material-symbols-outlined">share</span></a>
+<a class="social-btn glass-card" href="mailto:huzaifaraheem960@gmail.com?subject=SnapLink%20Inquiry">
+    <span class="material-symbols-outlined">alternate_email</span>
+</a>
+</div>
+</div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
