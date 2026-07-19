@@ -98,7 +98,7 @@
 </div>
 </div>
 <div class="stat-card glass-card">
-<div class="stat-icon icon-secondary">
+<div class="stat-icon icon-primary">
 <span class="material-symbols-outlined">ads_click</span>
 </div>
 <div>
@@ -154,6 +154,21 @@
 </div>
 </div>
 </footer>
+
+<!-- 7. Confirm Dialog -->
+<div class="modal-overlay" id="confirmModal" aria-hidden="true">
+<div class="modal-card glass-card" role="alertdialog" aria-modal="true" aria-labelledby="confirmTitle" aria-describedby="confirmMessage">
+<div class="modal-icon">
+<span class="material-symbols-outlined">delete</span>
+</div>
+<h3 class="modal-title" id="confirmTitle">Delete this link?</h3>
+<p class="modal-message" id="confirmMessage">This action can't be undone. The short link will stop working.</p>
+<div class="modal-actions">
+<button class="btn-ghost" id="confirmCancel" type="button">Cancel</button>
+<button class="btn-danger" id="confirmOk" type="button">Delete</button>
+</div>
+</div>
+</div>
 
 <script src="app.js"></script>
 </body>

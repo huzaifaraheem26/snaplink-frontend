@@ -1,9 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
     // ---------- API CONFIG ----------
-    // On localhost we talk to the local backend. In production (Netlify),
-    // set window.SNAPLINK_API in code.html or replace PROD_API_URL below
-    // with your Render backend URL.
-    const PROD_API_URL = "https://snaplink-backend.onrender.com/api";
+    // IMPORTANT: replace PROD_API_URL with YOUR real Render backend URL
+    // (Render dashboard → your service → the URL shown at the top),
+    // keeping the trailing "/api". You can also override it at runtime by
+    // setting window.SNAPLINK_API in code.html before this script loads.
+    const PROD_API_URL = "https://snaplink-backend-d87c.onrender.com/api";
+
     const isLocal = ['localhost', '127.0.0.1'].includes(location.hostname);
     const API_URL = window.SNAPLINK_API
         || (isLocal ? "http://localhost:5000/api" : PROD_API_URL);
@@ -159,10 +161,49 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // ---------- CONFIRM MODAL (themed) ----------
+    function confirmDialog() {
+        const overlay = document.getElementById('confirmModal');
+        const okBtn = document.getElementById('confirmOk');
+        const cancelBtn = document.getElementById('confirmCancel');
+        if (!overlay || !okBtn || !cancelBtn) {
+            // Fallback to native confirm if markup is missing
+            return Promise.resolve(confirm('Delete this link?'));
+        }
+
+        return new Promise(resolve => {
+            const close = (result) => {
+                overlay.classList.remove('is-open');
+                overlay.setAttribute('aria-hidden', 'true');
+                okBtn.removeEventListener('click', onOk);
+                cancelBtn.removeEventListener('click', onCancel);
+                overlay.removeEventListener('click', onBackdrop);
+                document.removeEventListener('keydown', onKey);
+                resolve(result);
+            };
+            const onOk = () => close(true);
+            const onCancel = () => close(false);
+            const onBackdrop = (e) => { if (e.target === overlay) close(false); };
+            const onKey = (e) => {
+                if (e.key === 'Escape') close(false);
+                if (e.key === 'Enter') close(true);
+            };
+
+            okBtn.addEventListener('click', onOk);
+            cancelBtn.addEventListener('click', onCancel);
+            overlay.addEventListener('click', onBackdrop);
+            document.addEventListener('keydown', onKey);
+
+            overlay.setAttribute('aria-hidden', 'false');
+            overlay.classList.add('is-open');
+            cancelBtn.focus();
+        });
+    }
+
     // ---------- DELETE LINK ----------
     async function deleteLink(id) {
-        if (!confirm('Delete this link?')) return;
-        
+        if (!await confirmDialog()) return;
+
         try {
             const response = await fetch(`${API_URL}/links/${id}`, {
                 method: 'DELETE'
