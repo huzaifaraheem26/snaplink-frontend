@@ -5,7 +5,7 @@ SnapLink is a modern and responsive URL Shortener frontend built with HTML, CSS,
 
 ## Features
 
-- Modern Glassmorphism UI
+- Modern Glassmorphism UI and ux
 - Responsive Design
 - Shorten Long URLs
 - Copy Short URL
